@@ -22,7 +22,8 @@ void in(int array[],int number)
 void de(int array[],int number)
 {
 	for (int i = 0; i < size; i++) {
-		if (array[i] == ' ') {
+		if(array[i]==number){
+			array[i] == ' ';
 			for (int j = i; j < size; j++) {
 				if (j + 1 == size) {
 					array[j] = ' ';
@@ -31,9 +32,9 @@ void de(int array[],int number)
 					array[j] = array[j + 1];
 				}
 			}
+		i = i - 1;
 		}
 	}
-	return;
 }
 void print(int array[])
 {
