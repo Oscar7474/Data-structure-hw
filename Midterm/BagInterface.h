@@ -1,8 +1,3 @@
-//  Created by Frank M. Carrano and Tim Henry.
-//  Copyright (c) 2013 __Pearson Education__. All rights reserved.
-
-/** Listing 1-1.
-    @file BagInterface.h */
 #ifndef _BAG_INTERFACE
 #define _BAG_INTERFACE
 
