@@ -1,7 +1,4 @@
-﻿// Midterm201911.cpp : 定義主控台應用程式的進入點。
-//
-
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include <cctype>
 #include "polynomial1.h"
