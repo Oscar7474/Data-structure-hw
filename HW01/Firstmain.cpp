@@ -48,13 +48,17 @@ void writeBackwardR2(string s)
 
 int countI(string s, char c)
 {
+	int length = s.size();
 	int count = 0;
-	for (char i : s) {
+	/*for (char i : s) {
 		if (i == c) {
 			count++;
 		}
-	}
-	return count;//
+	}*/
+	for(int i = 0 ; i < length ; i++)
+		if(s[i] == c)
+			count++;
+	return count;
 }
 
 int countR(string s, char c)
@@ -133,12 +137,12 @@ int TI( int m, int n)
 
 	if (m > n) {
 		for (int i = 0; i < abs(n); i++) {   
-			sum = sum + abs(m);
+			sum = sum - abs(m);
 		}
 	}
 	else {
 		for (int j = 0; j < abs(m); j++) {
-			sum = sum + abs(n);
+			sum = sum -		 abs(n);
 		}
 	}
 	if (m < 0 && n < 0) {
