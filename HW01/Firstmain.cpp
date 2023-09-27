@@ -142,7 +142,7 @@ int TI( int m, int n)
 	}
 	else {
 		for (int j = 0; j < abs(m); j++) {
-			sum = sum -		 abs(n);
+			sum = sum - abs(n);
 		}
 	}
 	if (m < 0 && n < 0) {
