@@ -304,12 +304,17 @@ int BinarySearchTree<ItemType>::nodesOfTwoChildrenR()
 template<class ItemType>
 int BinarySearchTree<ItemType>::nodesOfTwoChildren_Recu(BinaryNode<ItemType>* subtreePtr)
 {
+	int count = 0;
+	
+	if (subtreePtr) {
+		if(subtreePtr->getLeftChildPtr()&&subtreePtr->getRightChildPtr()) {
+			count = 1;
+		}
+		count = count + nodesOfTwoChildren_Recu(subtreePtr->getLeftChildPtr());
+		count = count + nodesOfTwoChildren_Recu(subtreePtr->getRightChildPtr());
+	}
 
-
-	// add your code here
-
-
-	return 0;
+	return count;
 }
 template<class ItemType>
 int BinarySearchTree<ItemType>::nodesOfTwoChildrenI()
@@ -320,12 +325,24 @@ int BinarySearchTree<ItemType>::nodesOfTwoChildrenI()
 template<class ItemType>
 int BinarySearchTree<ItemType>::nodesOfTwoChildren_Iter(BinaryNode<ItemType>* subtreePtr)
 {
-
-
-	// add your code here
-
-
-	return 0;
+	queue<BinaryNode<ItemType>*> box;
+	int count = 0;
+	box.push(subtreePtr);
+	BinaryNode<ItemType>* tmp;
+	while (!box.empty()) {
+		tmp = box.front();
+		if (tmp->getLeftChildPtr() && tmp->getRightChildPtr()) {
+			count++;
+		}
+		if (tmp->getLeftChildPtr()) {
+			box.push(tmp->getLeftChildPtr());
+		}
+		if (tmp->getRightChildPtr()) {
+			box.push(tmp->getRightChildPtr());
+		}
+		box.pop();
+	}
+	return count;
 }
 
 template<class ItemType>
