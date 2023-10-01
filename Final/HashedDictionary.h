@@ -1,11 +1,3 @@
- //  Created by Frank M. Carrano and Tim Henry.
-//  Copyright (c) 2013 __Pearson Education__. All rights reserved.
-
-/** @file  HashedDictionary.cpp */
-
-// Separate chaining resolves collisions
-
-// PARTIALLY COMPLETE
 #include <string>
 #include "HashedEntry.h"
 
