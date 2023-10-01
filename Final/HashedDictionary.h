@@ -106,13 +106,40 @@ int HashedDictionary<KeyType, ItemType>::getHashIndex(const KeyType& searchKey)
 template <class KeyType, class ItemType>
 void HashedDictionary<KeyType, ItemType>::add(const KeyType& searchKey, const ItemType& newItem)
 {
-	HashedEntry<string, string>* itemPtr = getEntry(searchKey);
+	/*HashedEntry<KeyType, ItemType>* itemPtr = getEntry(searchKey);
 	// Compute the hashed index into the array
 	int itemHashIndex = getHashIndex(searchKey);
 
+	if (!itemPtr) {
+		HashedEntry<KeyType, ItemType>* newPtr = new HashedEntry<KeyType, ItemType>(newItem, searchKey);
+		if (hashTable[itemHashIndex] == nullptr) {
+			hashTable[itemHashIndex] = newPtr;
+		}
+		else {
+			HashedEntry<KeyType, ItemType>* curPtr = hashTable[itemHashIndex];
+			while (curPtr->getNext()) {
+				curPtr = curPtr->getNext();
+			}
+			curPtr->setNext(newPtr);
+		}
+	}
+	//else {
+	//	itemPtr->countUp();
+	/*	HashedEntry<KeyType, ItemType>* curPtr = hashTable[itemHashIndex];
 
-	// add your code here
+		while (curPtr != itemPtr) {
+			if (itemPtr->getCount() > curPtr->getCount()) {
+				
+				
+				
 
+				break;
+			}
+			curPtr = curPtr->getNext();
+		}*/
+
+
+	//}
 
 } // end add
 
@@ -120,29 +147,73 @@ template <class KeyType, class ItemType>
 bool HashedDictionary<KeyType, ItemType>::remove(const KeyType& searchKey)
 {
 	bool itemFound = false;
-	HashedEntry<string, string>* itemPtr = getEntry(searchKey);
+	/*HashedEntry<KeyType, ItemType>* itemPtr = getEntry(searchKey);
 	// Compute the hashed index into the array
 	int itemHashIndex = getHashIndex(searchKey);
+	if (itemPtr) {
+
+		if (itemPtr->getCount()==1) {
+			HashedEntry<KeyType, ItemType>* curPtr = hashTable[itemHashIndex];
+			if (curPtr == itemPtr) {
+				hashTable[itemHashIndex] = curPtr->getNext();
+			}
+			else {
+				while (curPtr->getNext() != itemPtr) {
+					curPtr = curPtr->getNext();
+				}
+				curPtr->setNext(itemPtr->getNext());
+			}
+		}
+		//else {
+		//	itemPtr->countDown();
+		/*	HashedEntry<KeyType, ItemType>* curPtr = itemPtr->getNext();
+			HashedEntry<KeyType, ItemType>* prev = nullptr;
+
+			while (curPtr) {
+				if (itemPtr->getCount() >= curPtr->getCount()) {
+					break;
+				}
+				prev = curPtr;
+				curPtr = curPtr->getNext();
+			}
+			if (prev) {
+				ItemType prevValue = prev->getItem();
+				ItemType itemValue = itemPtr->getItem();
+				int prevCount = prev->getCount();
+				int itemCount = itemPtr->getCount();
+
+				prev->setCount(itemCount);
+				//curPtr->setItem(itemValue);
+
+				itemPtr->setCount(prevCount);
+				//itemPtr->setItem(curValue);
 
 
-	// add yor code here
+			}
+			
 
+		//}
 
-	return itemFound;
+		itemFound = true;
+	}*/
 } // end remove
 
 template <class KeyType, class ItemType>
 HashedEntry<KeyType, ItemType>* HashedDictionary<KeyType, ItemType>::getEntry(const KeyType& searchKey)
 {
 	bool itemFound = false;
-
+	
 	// Compute the hashed index into the array
 	int itemHashIndex = getHashIndex(searchKey);
-
-
+	HashedEntry<KeyType, ItemType>* curPtr = hashTable[itemHashIndex];
+	while (curPtr) {
+		if (curPtr->getKey() == searchKey) {
+			itemFound = true;
+			break;
+		}
+		curPtr = curPtr->getNext();
+	}
 	
-
-
 	return nullptr;
 }
 
