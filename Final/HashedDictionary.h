@@ -140,7 +140,7 @@ HashedEntry<KeyType, ItemType>* HashedDictionary<KeyType, ItemType>::getEntry(co
 	int itemHashIndex = getHashIndex(searchKey);
 
 
-	// add your code here
+	
 
 
 	return nullptr;
