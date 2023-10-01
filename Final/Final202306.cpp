@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <fstream>
 #include <queue>
@@ -55,24 +54,57 @@ void stringToTokens(queue<string>& aQueue, string aString)
 
 bool pqArrayAdd(BinaryNode<string>* pqArray, int& size, const string word)
 {
-
-	// add your code here
-
-	pqArray[size] = word;
-	//pqArray[size].countUp();
-	size++;
-
+	int k = 0;
+	if (size == 0) {
+		pqArray[size] = word;
+		size++;
+		k = 1;
+	}
+	bool check = false;
+	if (k == 0) {
+		for (int i = 0; i < size; i++) {
+			if (pqArray[i].getItem() == word) {
+				check = true;
+				pqArray[i].countUp();
+				break;
+			}
+		}
+		if (check == false) {
+			pqArray[size] = word;
+			size++;
+		}
+		for (int i = size - 1; i > 0; i--) {
+			if (pqArray[i].getCount() > pqArray[i - 1].getCount()) {
+				swap(pqArray[i], pqArray[i - 1]);
+			}
+		}
+	}
 	return true;
 }
 
 bool pqArrayRemove(BinaryNode<string>* pqArray, int& size)
 {
-
-	// add your code here
-
+	int check = 0;
 	pqArray[0].countDown();
-	//size--;
+	
+	for (int i = 0; i < size; i++) {
+		if (pqArray[i].getCount() == 0) {
+			for (int j = i; j + 1 < size; j++) {
+				pqArray[j] = pqArray[j + 1];
+			}
+			size--;
+		}
+	}
 
+	for (int i = 0; i < size-1; i++) {
+		for (int j = 0; j < size-i-1; j++) {
+			if (pqArray[j].getCount() < pqArray[j + 1].getCount()) {
+				swap(pqArray[j], pqArray[j + 1]);
+			}
+		}
+	}
+	
+	
 	return true;
 }
 
@@ -139,43 +171,59 @@ void showAdjMatrix(int** matrixGraph, int numVertices)
 
 int findMinimumWeight(int** matrixGraph, int numVertices)
 {
+	int min = INT_MAX;
+
+	for (int i = 0; i < numVertices; i++) {
+		for (int j = 0; j < numVertices; j++) {
+			if (matrixGraph[i][j] != INT_MAX && matrixGraph[i][j] < min&& matrixGraph[i][j]!=0) {
+				min = matrixGraph[i][j];
+			}
+		}
+	}
 
 
-	// add your code here
-
-
-	return 0;
+	return min;
 }
 
 
 void updateWeight(int** matrixGraph, int numVertices, int vertexNo1, int vertexNo2, int weight)
 {
-
-
-	// add your code here
-
-
+	if (matrixGraph[vertexNo1][vertexNo2] != INT_MAX) {
+		matrixGraph[vertexNo1][vertexNo2] = weight;
+	}
+	else if (matrixGraph[vertexNo2][vertexNo1] != INT_MAX) {
+		matrixGraph[vertexNo2][vertexNo1] = weight;
+	}
 	return;
 }
 
 void removeEdge(int** matrixGraph, int numVertices, int vertexNo1, int vertexNo2)
 {
 
-
-		// add your code here
-
-
+	for (int i = 0; i < numVertices; i++) {
+		if (matrixGraph[vertexNo1][vertexNo2] != INT_MAX && vertexNo1 != vertexNo2) {
+			matrixGraph[vertexNo1][vertexNo2] = INT_MAX;
+		}
+		if (matrixGraph[vertexNo2][vertexNo1] != INT_MAX && vertexNo1 != vertexNo2) {
+			matrixGraph[vertexNo2][vertexNo1] = INT_MAX;
+		}
+	}
 		return;
 }
 
 int countEdges(int** matrixGraph, int numVertices)
 {
 
+	int num=0;
+	for (int i = 0; i < numVertices; i++) {
+		for (int j = 0; j < numVertices; j++) {
+			if (matrixGraph[i][j] != INT_MAX && i != j) {
+				num++;
+			}
+		}
+	}
 
-	// add your code here
-
-
-	return 0;
+	return num/2;
 }
 void doQ2()
 {
