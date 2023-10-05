@@ -354,12 +354,37 @@ bool BinarySearchTree<ItemType>::isAllTwoChildrenR(const ItemType target)
 template<class ItemType>
 bool BinarySearchTree<ItemType>::isAllTwoChildren_Recu(BinaryNode<ItemType>* subtreePtr, const ItemType target)
 {
+	if (!subtreePtr)
+		return false;
 
+	if (target > subtreePtr->getItem())
+		return isAllTwoChildren_Recu(subtreePtr->getRightChildPtr(), target);
+	else if (target < subtreePtr->getItem())
+		return isAllTwoChildren_Recu(subtreePtr->getLeftChildPtr(), target);
+	else
+	{
+		queue<BinaryNode<ItemType> *> q;
 
-	
+		q.push(subtreePtr);
 
+		while (!q.empty())
+		{
+			BinaryNode<ItemType> *temp = q.front();
 
-	return false;
+			q.pop();
+
+			if ((temp->getLeftChildPtr() == nullptr && temp->getRightChildPtr() != nullptr) ||
+				(temp->getLeftChildPtr() != nullptr && temp->getRightChildPtr() == nullptr))
+				return false;
+
+			if (temp->getLeftChildPtr())
+				q.push(temp->getLeftChildPtr());
+
+			if (temp->getRightChildPtr())
+				q.push(temp->getRightChildPtr());
+		}
+		return true;
+	}
 } // end
 
 template<class ItemType>
@@ -402,10 +427,6 @@ bool BinarySearchTree<ItemType>::isAllTwoChildren_Iter(BinaryNode<ItemType>* sub
 			return true;
 		}
 	}
-	return false;
-
-
-
 	return false;
 } // end
 #endif
